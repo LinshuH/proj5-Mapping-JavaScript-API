@@ -1,1 +1,6 @@
-# proj5-Mapping-JavaScript-API
+# proj5-mapping
+
+# Author: 
+Linshu
+# Contact info: 
+linshuh@uoregon.edu
