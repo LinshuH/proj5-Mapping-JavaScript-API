@@ -3,7 +3,7 @@
 # (syllabus) that highlights the current week
 # 
 SHELL = /bin/bash
-SRC = syllabus
+SRC = map
 SOURCES = $(SRC)/flask_syllabus.py $(SRC)/pre.py $(SRC)/credentials.ini
 
 
