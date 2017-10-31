@@ -1,5 +1,5 @@
 .DS_Store
-syllabus/credentials.ini
+credentials.ini
 
 # The rest are standard ignores from github
 
