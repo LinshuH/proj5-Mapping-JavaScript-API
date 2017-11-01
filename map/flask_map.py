@@ -10,7 +10,7 @@ current week (if the academic term is in session).
 
 import flask
 import logging
-import arrow      # Replacement for datetime, based on moment.js
+#import arrow      # Replacement for datetime, based on moment.js
 
 # Our own modules
 import pre        # Preprocess schedule file

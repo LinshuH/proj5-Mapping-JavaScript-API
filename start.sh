@@ -21,8 +21,8 @@ echo "Activating ${activate}"
 source ${activate}
 echo "Activated"
 
-pushd syllabus
-python3 flask_syllabus.py -P ${PORTNUM} &
+pushd map 
+python3 flask_map.py -P ${PORTNUM} &
 pid=$! 
 popd
 echo "${pid}" >SERVICE_PID

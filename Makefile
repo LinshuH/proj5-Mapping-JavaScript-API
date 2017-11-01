@@ -4,7 +4,7 @@
 # 
 SHELL = /bin/bash
 SRC = map
-SOURCES = $(SRC)/flask_syllabus.py $(SRC)/pre.py $(SRC)/credentials.ini
+SOURCES = $(SRC)/flask_map.py $(SRC)/pre.py $(SRC)/credentials.ini
 
 
 $(SRC)/credentials.ini:
@@ -31,8 +31,8 @@ dist:
 #  Runs in foreground; kill with control-C. 
 # 
 run:	$(SOURCES) env
-	(source env/bin/activate; cd syllabus; \
-	python3 flask_syllabus.py ) || true
+	(source env/bin/activate; cd map; \
+	python3 flask_map.py ) || true
 
 ## 
 ## Run as background service, under gunicorn
