@@ -1,1 +1,22 @@
 #This is the file that conatin the poi information
+# for each poi, shows the description, lagitude, and longtitude
+
+description: Korean Restaurant -- The Jail
+
+latitude: 44.049867
+
+longitude: -123.085107
+
+# This is the second one 
+description: Karaoke Bar -- The Barn Light
+
+latitude: 44.050576
+
+longitude: -123.092864
+
+#This is the third one 
+description: Bike Shop -- Hutch's Bicycle Store
+
+latitude: 44.050268
+
+longitude: -123.096297
