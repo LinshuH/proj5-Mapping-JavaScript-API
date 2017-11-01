@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <div id="map"></div>
+
+
+
+ <script>
+ //put the pin on the map, when user click the new location, set pin in new location
+ function initMap() {
+    var uluru = {lat: -25.363, lng: 131.044};
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 4,
+        center: uluru
+    });
+    var markers = [];
+
+    map.addListener('click', function(event) {
+    deleteMarkers();
+    placeMarker(event.latLng, map);  
+    }); 
+ }
+
+ function placeMarker(location, map) {
+    var marker = new google.maps.Marker({
+        position: location,
+        map: map
+    });
+    markers.push(marker);
+    markers[0].setMap(map);
+ }
+
+ function deleteMarkers() {
+    markers[0].setMap(null);
+    markers = [];
+
+ </script>
+
+
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBCZ2ULK-fJ94UsWLzbRBL9S_n7CsUJPwi&callback=initMap">
+    </script>
+  </body>
+</html>
