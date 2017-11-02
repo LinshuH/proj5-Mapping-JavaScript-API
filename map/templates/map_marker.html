@@ -55,7 +55,7 @@ function initMap() {
       geolocal();
 } //end initMap
 
-		// --- find user location
+    // --- find user location
     function geolocal() {
      if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -64,7 +64,7 @@ function initMap() {
             lng: position.coords.longitude
           };
 
-					addMarker(pos,"The user is here");
+	addMarker(pos,"The user is here");
         }, function() {
           handleLocationError(true, infowindow, map.getCenter());
         });
@@ -92,11 +92,11 @@ function initMap() {
       markers.push(marker);
       
       var infowindow = new google.maps.InfoWindow({
-      		position: location,
+      	  position: location,
           content: description
       })
       marker.addListener('click',function() {
-      		infowindow.open(map,marker);
+      	infowindow.open(map,marker);
       });    
     }
     // Sets the map on all markers in the array.
