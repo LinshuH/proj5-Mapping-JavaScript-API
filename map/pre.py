@@ -30,7 +30,7 @@ def process(raw):
 
        # parts = line.split(':')  # parts contain two parts, term before :(field) and after column(content).
        # print(parts)
-
+        parts = line.split(":")
         elif len(line) != 0: 
             field = parts[0]         #description/latitude/longitude
             content = parts[1]       #name or the number
