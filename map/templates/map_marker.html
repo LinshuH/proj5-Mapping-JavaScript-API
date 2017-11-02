@@ -34,20 +34,12 @@
     <div id="map"></div>
     <p>Click on the map to add markers.</p>
     <script>
-    var map;
-<<<<<<< HEAD
-    var markers = [];
-    var infowindow = new google.maps.InfoWindow;
-
-
- function initMap() {
-=======
+var map;
 var markers = [];
 var infowindow = new google.maps.InfoWindow;
 
 
 function initMap() {
->>>>>>> 0c4b2c1e100537c63c6fee214b3b5ba0720e075b
       var Eugene = {lat: 44.052, lng: -123.086};
       map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
@@ -61,15 +53,9 @@ function initMap() {
       });
       // Adds a marker at the center of the map.
       geolocal();
-<<<<<<< HEAD
- } //end initMap
-
-        // --- find user location
-=======
 } //end initMap
 
 		// --- find user location
->>>>>>> 0c4b2c1e100537c63c6fee214b3b5ba0720e075b
     function geolocal() {
      if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -78,20 +64,11 @@ function initMap() {
             lng: position.coords.longitude
           };
 
-<<<<<<< HEAD
-                    addMarker(pos,"The user is here");
-=======
 					addMarker(pos,"The user is here");
->>>>>>> 0c4b2c1e100537c63c6fee214b3b5ba0720e075b
         }, function() {
           handleLocationError(true, infowindow, map.getCenter());
         });
       } else {
-<<<<<<< HEAD
-            // Browser doesn't support Geolocation
-            handleLocationError(false, infoWindow, map.getCenter());
-        }
-=======
     		// Browser doesn't support Geolocation
     		handleLocationError(false, infoWindow, map.getCenter());
   		}
@@ -103,22 +80,9 @@ function initMap() {
                             'Error: The Geolocation service failed.' :
                             'Error: Your browser doesn\'t support geolocation.');
       infowindow.open(map);
->>>>>>> 0c4b2c1e100537c63c6fee214b3b5ba0720e075b
     }
     // --- end find user location
 
-<<<<<<< HEAD
-    function handleLocationError(browserHasGeolocation, infowindow, pos) {
-      infowindow.setPosition(pos);
-      infowindow.setContent(browserHasGeolocation ?
-                            'Error: The Geolocation service failed.' :
-                            'Error: Your browser doesn\'t support geolocation.');
-      infowindow.open(map);
-    }
-    // --- end find user location
-
-=======
->>>>>>> 0c4b2c1e100537c63c6fee214b3b5ba0720e075b
     // --- Add a marker on where user click
     function addMarker(location,description) {
       var marker = new google.maps.Marker({
@@ -128,19 +92,11 @@ function initMap() {
       markers.push(marker);
       
       var infowindow = new google.maps.InfoWindow({
-<<<<<<< HEAD
-            position: location,
-          content: description
-      })
-      marker.addListener('click',function() {
-            infowindow.open(map,marker);
-=======
       		position: location,
           content: description
       })
       marker.addListener('click',function() {
       		infowindow.open(map,marker);
->>>>>>> 0c4b2c1e100537c63c6fee214b3b5ba0720e075b
       });    
     }
     // Sets the map on all markers in the array.
@@ -154,12 +110,7 @@ function initMap() {
       setMapOnAll(null);
       markers = [];
     }
-<<<<<<< HEAD
-   // --- end seting the marker    
-=======
    // --- end seting the marker
-    
->>>>>>> 0c4b2c1e100537c63c6fee214b3b5ba0720e075b
    </script>
    <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBCZ2ULK-fJ94UsWLzbRBL9S_n7CsUJPw&callback=initMap">
