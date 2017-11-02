@@ -113,6 +113,13 @@ function initMap() {
    // --- end seting the marker
 
    //Jinja handle the data from py file
+    {% for entry in g.poi %}
+        {% for des,latlng in entry.poi() %}
+            var place = {{des|tojson}}
+            var local = {{latlng|tojson}}
+            addMarker(local,des);
+        {% endfor %}
+    {% endfor %}
    </script>
    <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBCZ2ULK-fJ94UsWLzbRBL9S_n7CsUJPw&callback=initMap">

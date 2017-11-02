@@ -34,7 +34,8 @@ if configuration.DEBUG:
 # it atomically in the view functions. 
 #
 
-#poi = pre.process(open(configuration.SYLLABUS))
+
+pois = pre.process(open(configuration.POI))
 
 
 
@@ -49,15 +50,15 @@ if configuration.DEBUG:
 def index():
   """Main application page; most users see only this"""
   app.logger.debug("Main page entry")
-  #flask.g.schedule = schedule  # To be accessible in Jinja2 on page
+  flask.g.poi= pois  # To be accessible in Jinja2 on page
   return flask.render_template('map_marker.html')
 
 @app.route("/refresh")
 def refresh():
     """Admin user (or debugger) can use this to reload the schedule."""
     app.logger.debug("Refreshing schedule")
-    #global schedule
-    #schedule = pre.process(open(configuration.SYLLABUS))
+    global pois
+    pois = pre.process(open(configuration.POI))
     return flask.redirect(flask.url_for("index"))
 
 ### Error pages ###
