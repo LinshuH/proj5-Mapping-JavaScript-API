@@ -12,39 +12,33 @@ log = logging.getLogger(__name__)
 
 def process(raw):
     """
-    Line by line processing of syllabus file.  Each line that needs
-    processing is preceded by 'head: ' for some string 'head'.  Lines
-    may be continued if they don't contain ':'.  If # is the first
-    non-blank character on a line, it is a comment ad skipped. 
+    Line by line processing of syllabus file.
+    The poi file contains pois that contain description,lat,long
+    raw: the name of the text file that been read
+    entry is a temporary dictionary to represent each poi
+    cooked is a list that contain all the pois in a text string format.
     """
-    field = None
-    entry = { }
-    cooked = [ ] 
-
+    entry = {}
+    cooked = []
+    
     for line in raw:
-        log.debug("Line: {}".format(line))
-        line = line.strip()  # Line is every line in the txt file(raw)
-        if len(line) == 0 or line[0]=="#" :
-            log.debug("Skipping")
-            continue
-
-       # parts = line.split(':')  # parts contain two parts, term before :(field) and after column(content).
-       # print(parts)
-        parts = line.split(":")
-        elif len(line) != 0: 
-            field = parts[0]         #description/latitude/longitude
-            content = parts[1]       #name or the number
-            entry[field] = content 
-            print (entry)
-        else:
-            raise ValueError("Trouble with line: '{}'\n".format(line) + 
-                "Split into |{}|".format("|".join(parts)))
-
-        if entry:
-            cooked.append(entry)
-            entry = {} 
+    	line = line.strip()
+    	if len(line) !=0 and line[0] !="#" :
+    		logging.info("Line: {}".format(line))
+    		parts = line.split(",")
+    		logging.info("Part: {}".format(parts))
+    		description = parts[0]
+    		lat = parts[1]
+    		lng = parts[2]
+    		
+    		entry["des"] = description
+    		entry["latlng"] = { "lat":lat, "lng":lng }
+    		#entry["lng"] = lng
+    		logging.info("Entry: {}".format(entry))
+    		cooked.append(entry)
+    		entry = {}
+    logging.info("cooked: {}".format(cooked))
     return cooked
-
 
 def main():
     f = open("poi.txt")

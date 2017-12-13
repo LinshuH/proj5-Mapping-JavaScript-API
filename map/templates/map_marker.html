@@ -28,6 +28,20 @@
         padding-left: 10px;
       }
     </style>
+ <script
+     src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+  </script>
+
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key={{g.api_key}}&callback=initMap">
+    </script>
+
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+   <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">
+   </script>
+
   </head>
   <body>
     
@@ -36,7 +50,8 @@
     <script>
 var map;
 var markers = [];
-var infowindow = new google.maps.InfoWindow;
+var infowindow;
+
 
 
 function initMap() {
@@ -53,18 +68,18 @@ function initMap() {
       });
       // Adds a marker at the center of the map.
       geolocal();
+      //create_opi ();     
 } //end initMap
 
     // --- find user location
     function geolocal() {
      if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-          var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
-
-	addMarker(pos,"The user is here");
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude };
+    //var user_location = https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=YOUR_API_KEY
+	      addMarker(pos,"The user is here");
         }, function() {
           handleLocationError(true, infowindow, map.getCenter());
         });
@@ -72,7 +87,7 @@ function initMap() {
     		// Browser doesn't support Geolocation
     		handleLocationError(false, infoWindow, map.getCenter());
   		}
-    }
+    } //end geolocal()
 
     function handleLocationError(browserHasGeolocation, infowindow, pos) {
       infowindow.setPosition(pos);
@@ -99,6 +114,7 @@ function initMap() {
       	infowindow.open(map,marker);
       });    
     }
+
     // Sets the map on all markers in the array.
     function setMapOnAll(map) {
       for (var i = 0; i < markers.length; i++) {
@@ -112,17 +128,25 @@ function initMap() {
     }
    // --- end seting the marker
 
-   //Jinja handle the data from py file
-    {% for entry in g.poi %}
-        {% for des,latlng in entry.poi() %}
-            var place = {{des|tojson}}
-            var local = {{latlng|tojson}}
-            addMarker(local,des);
-        {% endfor %}
-    {% endfor %}
+
+//Jinja handle the data from py file
+{% for entry in g.pois %}
+  var description = {{entry["des"]|tojson}}
+  var lati = {{entry["latlng"]["lat"]|tojson}}
+  var longi = {{entry["latlng"]["lng"]|tojson}}
+  console.log(description)
+  console.log(lati)
+  console.log(longi)
+  //var location = {lat: parseFloat(lati),lng: parseFloat(longi)};
+  var location = new google.map.LatLng(parseFloat(lati), parseFloat(longi))
+  addMarker(location,description)
+
+{% endfor %}
+    
+
    </script>
-   <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBCZ2ULK-fJ94UsWLzbRBL9S_n7CsUJPw&callback=initMap">
-    </script>
+
+
+   
   </body>
 </html>

@@ -2,10 +2,12 @@
 # for each poi, shows the description, lagitude, and longtitude
 
 #This is the first poi
-Korean Restaurant -- The Jail:44.049867,-123.085107
+Korean Restaurant -- The Jail,44.049867,-123.085107
 
 # This is the second poi
-Karaoke Bar -- The Barn Light:44.050576,-123.092864
+Karaoke Bar -- The Barn Light,44.050576,-123.092864
 
 #This is the third poi
-Bike Shop -- Hutch's Bicycle Store: 44.050268,-123.096297
+Bike Shop -- Hutch's Bicycle Store,44.050268,-123.096297
+
+

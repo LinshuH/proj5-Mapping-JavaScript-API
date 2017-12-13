@@ -20,23 +20,35 @@ import config     # Configure from configuration files or command line
 ###
 # Globals
 ###
-app = flask.Flask(__name__)
+"""
 if __name__ == "__main__":
     configuration = config.configuration()
 else:
     # If we aren't main, the command line doesn't belong to us
     configuration = config.configuration(proxied=True)
+app = flask.Flask(__name__)
+CONFIG = config.configuration()
+app.api_key = configuration.APE_KEY
+
 
 if configuration.DEBUG:
-    app.logger.setLevel(logging.DEBUG)
+    app.logger.setLevel(logging.INFO)
+"""
+if __name__ == "__main__":
+    configuration = config.configuration()
+else:
+    configuration = config.configuration(proxied=True)
 
+app = flask.Flask(__name__)
+CONFIG = config.configuration()
+app.debug=CONFIG.DEBUG
+app.logger.setLevel(logging.INFO) ##Used to be .DEBUG
+#app.secret_key=CONFIG.SECRET_KEY
+
+app.api_key = CONFIG.API_KEY
 # Pre-processed schedule is global, so be careful to update
 # it atomically in the view functions. 
 #
-
-
-pois = pre.process(open(configuration.POI))
-
 
 
 ###
@@ -50,16 +62,32 @@ pois = pre.process(open(configuration.POI))
 def index():
   """Main application page; most users see only this"""
   app.logger.debug("Main page entry")
-  flask.g.poi= pois  # To be accessible in Jinja2 on page
+  pois = pre.process(open(configuration.POI))
+  data = {"pois":pois}
+  logging.info ("This is pois: {}".format(pois))
+  flask.g.pois = pois
+  flask.g.api_key = app.api_key
   return flask.render_template('map_marker.html')
 
 @app.route("/refresh")
 def refresh():
     """Admin user (or debugger) can use this to reload the schedule."""
     app.logger.debug("Refreshing schedule")
-    global pois
+    #global pois
     pois = pre.process(open(configuration.POI))
     return flask.redirect(flask.url_for("index"))
+
+
+@app.route("/_poi")
+def mark_pois():
+	"""
+	Use flask to send the pois information to the html page.
+	"""
+	pois = pre.process(open(configuration.POI))
+	result = {"pois":pois}
+	return flask.jsonify(result = result)
+	
+	
 
 ### Error pages ###
 #   Each of these transmits an error code in the transmission
